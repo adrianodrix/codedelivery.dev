@@ -1,0 +1,12 @@
+## Code Delivery
+#### by [Adriano Santos](http://www.adrianosantos.com.br)
+
+An App developed in the Course Laravel 5.1 with Ionic and Cordova. 
+
+## Official Course
+
+App dev on the [Course website](http://sites.code.education/laravel-ionic-cordova-t3/).
+
+### License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
