@@ -1,0 +1,45 @@
+<?php
+
+namespace CodeDelivery\Fractal\Transformers;
+
+use League\Fractal\TransformerAbstract;
+use CodeDelivery\Entities\Product;
+
+/**
+ * Class ProductTransformer
+ * @package namespace CodeDelivery\Fractal\Transformers;
+ */
+class ProductTransformer extends TransformerAbstract
+{
+    protected $defaultIncludes = ['category'];
+
+    /**
+     * Transform the \Product entity
+     * @param \Product $model
+     *
+     * @return array
+     */
+    public function transform(Product $model)
+    {
+        return [
+            'id'         => (int) $model->id,
+            'category_id'=> (int) $model->category_id,
+            'name'       => $model->name,
+            'description'=> $model->description,
+            'price'      => (float) $model->price,
+            'created_at' => $model->created_at,
+            'updated_at' => $model->updated_at
+        ];
+    }
+
+    public function includeCategory(Product $model)
+    {
+        return $this->item($model->category, $this->setTransformer(new CategoryTransformer()));
+    }
+
+    private function setTransformer($transformer)
+    {
+        $transformer->setDefaultIncludes([]);
+        return $transformer;
+    }
+}
