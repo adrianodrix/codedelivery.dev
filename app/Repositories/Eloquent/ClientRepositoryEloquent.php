@@ -30,4 +30,10 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function presenter()
+    {
+        return \CodeDelivery\Fractal\Presenters\ClientPresenter::class;
+    }
+
 }

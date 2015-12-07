@@ -30,4 +30,9 @@ class OrderItemRepositoryEloquent extends BaseRepository implements OrderItemRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function presenter()
+    {
+        return \CodeDelivery\Fractal\Presenters\OrderItemPresenter::class;
+    }
 }

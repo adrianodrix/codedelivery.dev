@@ -14,7 +14,8 @@
 $factory->define(CodeDelivery\Entities\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
+        'email' => strtolower($faker->email),
+        'role' => 'client',
         'password' => bcrypt('123456'),
         'remember_token' => str_random(10),
     ];
@@ -43,7 +44,7 @@ $factory->define(CodeDelivery\Entities\Client::class, function (Faker\Generator 
         'address' => $faker->address,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
-        'zipcode' => $faker->postcode,
+        'postcode' => $faker->postcode,
     ];
 });
 

@@ -17,10 +17,7 @@ class OrderItem extends Model implements Transformable
         'quantity'
     ];
 
-    public function presenter()
-    {
-        return \CodeDelivery\Fractal\Presenters\OrderItemPresenter::class;
-    }
+
 
     public function order()
     {

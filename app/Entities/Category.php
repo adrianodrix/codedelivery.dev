@@ -15,11 +15,6 @@ class Category extends Model implements Transformable
         'name'
     ];
 
-    public function presenter()
-    {
-        return \CodeDelivery\Fractal\Presenters\CategoryPresenter::class;
-    }
-
     public function products()
     {
         return $this->hasMany(Product::class);

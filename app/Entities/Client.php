@@ -20,10 +20,6 @@ class Client extends Model implements Transformable
         'zipcode'
     ];
 
-    public function presenter()
-    {
-        return \CodeDelivery\Fractal\Presenters\ClientPresenter::class;
-    }
 
     public function user()
     {

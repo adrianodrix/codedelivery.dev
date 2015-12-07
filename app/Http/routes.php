@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function(){
+    $repo = app()->make('CodeDelivery\Repositories\Contracts\OrderRepository');
+    return $repo->all();
+});

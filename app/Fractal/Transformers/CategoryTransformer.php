@@ -23,9 +23,9 @@ class CategoryTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'name' => $model->name,
-            'created_at' => $model->created_at,
+            'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'created_at_for_humans' => $model->created_at->diffForHumans(),
-            'updated_at' => $model->updated_at,
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

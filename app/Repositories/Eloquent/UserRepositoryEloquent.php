@@ -5,13 +5,13 @@ namespace CodeDelivery\Repositories\Eloquent;
 use CodeDelivery\Entities\User;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\Contracts\UserRepositoryRepository;
+use CodeDelivery\Repositories\Contracts\UserRepository;
 
 /**
  * Class UserRepositoryRepositoryEloquent
  * @package namespace CodeDelivery\Repositories\Eloquent;
  */
-class UserRepositoryRepositoryEloquent extends BaseRepository implements UserRepositoryRepository
+class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
     /**
      * Specify Model class name
@@ -29,5 +29,11 @@ class UserRepositoryRepositoryEloquent extends BaseRepository implements UserRep
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+
+    public function presenter()
+    {
+        return \CodeDelivery\Fractal\Presenters\UserPresenter::class;
     }
 }

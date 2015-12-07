@@ -18,10 +18,6 @@ class Order extends Model implements Transformable
         'status'
     ];
 
-    public function presenter()
-    {
-        return \CodeDelivery\Fractal\Presenters\OrderPresenter::class;
-    }
 
     public function client()
     {

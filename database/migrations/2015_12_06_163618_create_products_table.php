@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
                 ->on('categories');
             $table->string('name')->index();
             $table->text('description')->nullable();
-            $table->decimal('price')->nullable();
+            $table->decimal('price',14,2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

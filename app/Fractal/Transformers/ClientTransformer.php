@@ -28,14 +28,14 @@ class ClientTransformer extends TransformerAbstract
             'address'    => $model->address,
             'city'       => $model->city,
             'state'      => $model->state,
-            'zipcode'    => $model->zipcode,
-            'created_at' => $model->created_at,
+            'postcode'    => $model->postcode,
+            'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'created_for_humans' => $model->created_at->diffForHumans(),
-            'updated_at' => $model->updated_at
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];
     }
 
-    public function includeCategory(Client $model)
+    public function includeUser(Client $model)
     {
         return $this->item($model->user, $this->setTransformer(new UserTransformer()));
     }

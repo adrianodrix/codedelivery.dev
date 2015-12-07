@@ -27,8 +27,8 @@ class ProductTransformer extends TransformerAbstract
             'name'       => $model->name,
             'description'=> $model->description,
             'price'      => (float) $model->price,
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'created_at' => $model->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];
     }
 

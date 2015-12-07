@@ -19,10 +19,6 @@ class Product extends Model implements Transformable
         'price'
     ];
 
-    public function presenter()
-    {
-        return ProductPresenter::class;
-    }
 
     public function category()
     {
