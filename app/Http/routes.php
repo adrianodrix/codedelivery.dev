@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
 });
 
-Route::get('/test', function(){
-    $repo = app()->make('CodeDelivery\Repositories\Contracts\OrderRepository');
-    return $repo->all();
+Route::group(['prefix' => 'api/v1', 'middleware' => 'oauth', 'as' => 'api.v1.'], function(){
+   Route::get('/test', ['as' => 'test', function(){
+       return app()->make('CodeDelivery\Repositories\Contracts\ClientRepository')->all();
+   }]);
 });
