@@ -2,34 +2,33 @@
 
 namespace CodeDelivery\Repositories\Eloquent;
 
-use CodeDelivery\Entities\User;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\Contracts\UserRepository;
+use CodeDelivery\Repositories\Contracts\CouponRepository;
+use CodeDelivery\Entities\Coupon;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
- * Class UserRepositoryRepositoryEloquent
+ * Class CouponRepositoryEloquent
  * @package namespace CodeDelivery\Repositories\Eloquent;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class CouponRepositoryEloquent extends BaseRepository implements CouponRepository
 {
     protected $fieldSearchable = [
-        'name',
-        'email'
+        'code',
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'name' => 'required|size:6',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|size:6',
+            'code' => 'required|unique:coupons|min:6|max:255',
+            'value' => 'required|numeric',
+            'used' => 'boolean'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-            'name' => 'sometimes|required',
-            'email' => 'sometimes|required|email|unique:users',
-            'password' => 'sometimes|required|size:6',
+            'code' => 'sometimes|required|unique:coupons|min:6|max:255',
+            'value' => 'sometimes|required|numeric',
+            'used' => 'sometimes|boolean'
         ],
     ];
 
@@ -40,7 +39,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Coupon::class;
     }
 
     /**
@@ -51,14 +50,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-
     public function presenter()
     {
-        return \CodeDelivery\Fractal\Presenters\UserPresenter::class;
-    }
-
-    public function getDeliveryMen()
-    {
-        return $this->model->where(['role' => 'deliveryman'])->list('name', 'id');
+        return \CodeDelivery\Fractal\Presenters\CouponPresenter::class;
     }
 }

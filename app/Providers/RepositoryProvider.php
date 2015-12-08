@@ -4,7 +4,7 @@ namespace CodeDelivery\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class CodeDeliveryRepositoryProvider extends ServiceProvider
+class RepositoryProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -46,6 +46,10 @@ class CodeDeliveryRepositoryProvider extends ServiceProvider
         $this->app->bind(
             \CodeDelivery\Repositories\Contracts\OrderItemRepository::class,
             \CodeDelivery\Repositories\Eloquent\OrderItemRepositoryEloquent::class
+        );
+        $this->app->bind(
+            \CodeDelivery\Repositories\Contracts\CouponRepository::class,
+            \CodeDelivery\Repositories\Eloquent\CouponRepositoryEloquent::class
         );
     }
 }

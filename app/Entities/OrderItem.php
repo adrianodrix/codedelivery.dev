@@ -16,9 +16,7 @@ class OrderItem extends Model implements Transformable
         'price',
         'quantity'
     ];
-
-
-
+    
     public function order()
     {
         return $this->belongsTo(Order::class);

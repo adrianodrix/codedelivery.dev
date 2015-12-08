@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\Contracts\OrderItemRepository;
 use CodeDelivery\Entities\OrderItem;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
  * Class OrderItemRepositoryEloquent
@@ -13,6 +14,22 @@ use CodeDelivery\Entities\OrderItem;
  */
 class OrderItemRepositoryEloquent extends BaseRepository implements OrderItemRepository
 {
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'order_id' => 'required|integer|exists:orders,id',
+            'product_id' => 'required|integer|exists:products,id',
+            'price' => 'required|number|min:0',
+            'quantity' => 'required|number|min:0',
+        ],
+
+        ValidatorInterface::RULE_UPDATE => [
+            'order_id' => 'sometimes|required|integer|exists:orders,id',
+            'product_id' => 'sometimes|required|integer|exists:products,id',
+            'price' => 'sometimes|required|number|min:0',
+            'quantity' => 'sometimes|required|number|min:0',
+        ],
+    ];
+
     /**
      * Specify Model class name
      *

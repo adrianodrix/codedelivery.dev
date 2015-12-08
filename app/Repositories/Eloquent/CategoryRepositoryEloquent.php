@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\Contracts\CategoryRepository;
 use CodeDelivery\Entities\Category;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
  * Class CategoryRepositoryEloquent
@@ -13,6 +14,20 @@ use CodeDelivery\Entities\Category;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
+    protected $fieldSearchable = [
+        'name'
+    ];
+
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'name' => 'required|min:6',
+        ],
+
+        ValidatorInterface::RULE_UPDATE => [
+            'name' => 'sometimes|required|min:6',
+        ],
+    ];
+
     /**
      * Specify Model class name
      *

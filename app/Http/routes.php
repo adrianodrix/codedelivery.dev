@@ -11,12 +11,24 @@
 |
 */
 
-Route::post('oauth/access_token', function() {
+Route::post('oauth/access_token', ['as' => 'oauth.access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
-});
+}]);
 
 Route::group(['prefix' => 'api/v1', 'middleware' => 'oauth', 'as' => 'api.v1.'], function(){
-   Route::get('/test', ['as' => 'test', function(){
-       return app()->make('CodeDelivery\Repositories\Contracts\ClientRepository')->all();
-   }]);
+    Route::group(['prefix' => 'admin', 'middleware' => 'oauth.checkrole:admin','as' => 'admin.'], function(){
+        Route::resource('/category',    'API\\Admin\\CategoryController');
+        Route::resource('/product',     'API\\Admin\\ProductController');
+        Route::resource('/client',      'API\\Admin\\ClientController');
+        Route::resource('/order',       'API\\Admin\\OrderController');
+        Route::resource('/coupon',      'API\\Admin\\CouponController');
+    });
+
+    Route::group(['prefix' => 'client', 'middleware' => 'oauth.checkrole:client','as' => 'client.'], function(){
+
+    });
+
+    Route::group(['prefix' => 'deliveryman', 'middleware' => 'oauth.checkrole:deliveryman','as' => 'deliveryman.'], function(){
+
+    });
 });

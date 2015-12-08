@@ -4,6 +4,7 @@ namespace CodeDelivery\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Prettus\Validator\Exceptions\ValidatorException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -44,6 +45,38 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        /**
+         * Response Exception as Json
+         *
+         */
+        if ($request->wantsJson()){
+            $error = new \stdclass();
+            $error->error = true;
+
+            if ($e instanceof NotFoundHttpException) {
+                $error->code = $e->getStatusCode();
+            } else {
+                $error->code = $e->getCode();
+            }
+
+            if ($error->code == 0){
+                $error->code = 400;
+            }
+
+            if ($e instanceof ValidatorException) {
+                $error->message = $e->getMessageBag();
+            } else {
+                $error->message = $e->getMessage();
+
+                if (\App::environment('local')) {
+                    $error->file = $e->getFile();
+                    $error->line = $e->getLine();
+                }
+            }
+
+            return response()->json($error, $error->code);
         }
 
         return parent::render($request, $e);

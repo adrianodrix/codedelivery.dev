@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\Contracts\ClientRepository;
 use CodeDelivery\Entities\Client;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
  * Class ClientRepositoryEloquent
@@ -13,6 +14,16 @@ use CodeDelivery\Entities\Client;
  */
 class ClientRepositoryEloquent extends BaseRepository implements ClientRepository
 {
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'user_id' => 'required|integer|exists:users,id',
+        ],
+
+        ValidatorInterface::RULE_UPDATE => [
+            'user_id' => 'sometimes|required|integer|exists:users,id',
+        ],
+    ];
+
     /**
      * Specify Model class name
      *

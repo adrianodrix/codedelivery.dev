@@ -7,6 +7,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\Contracts\ProductRepository;
 use CodeDelivery\Entities\Product;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
  * Class ProductRepositoryEloquent
@@ -14,6 +15,27 @@ use CodeDelivery\Entities\Product;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+    protected $fieldSearchable = [
+        'name',
+        'description',
+    ];
+
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'category_id' => 'required|integer|exists:categories,id',
+            'name' => 'required|string|size:6',
+            'description' => 'string',
+            'price' => 'required|number|min:0'
+        ],
+
+        ValidatorInterface::RULE_UPDATE => [
+            'category_id' => 'sometimes|required|integer|exists:categories,id',
+            'name' => 'sometimes|required|string|size:6',
+            'description' => 'sometimes|string',
+            'price' => 'sometimes|required|number|min:0'
+        ],
+    ];
+
     /**
      * Specify Model class name
      *

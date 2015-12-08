@@ -30,7 +30,7 @@ class ClientTransformer extends TransformerAbstract
             'state'      => $model->state,
             'postcode'    => $model->postcode,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-            'created_for_humans' => $model->created_at->diffForHumans(),
+            'created_at_for_humans' => $model->created_at->diffForHumans(),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];
     }

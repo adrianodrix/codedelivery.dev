@@ -64,3 +64,11 @@ $factory->define(CodeDelivery\Entities\OrderItem::class, function (Faker\Generat
         'quantity' => $faker->numberBetween(0,10),
     ];
 });
+
+$factory->define(CodeDelivery\Entities\Coupon::class, function (Faker\Generator $faker) {
+    return [
+        'code' => $faker->randomNumber(8),
+        'value' => $faker->numberBetween(0,100),
+        'used' => false,
+    ];
+});
