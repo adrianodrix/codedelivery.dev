@@ -1,6 +1,8 @@
 /vendor
 /node_modules
 /.idea
+/resources/bower_components
+npm-debug.log
 Homestead.yaml
 Homestead.json
 .env

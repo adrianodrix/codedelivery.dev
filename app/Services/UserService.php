@@ -10,4 +10,16 @@ class UserService extends EntityService
     {
         parent::__construct($repository);
     }
+
+    /**
+     * @param array $data
+     * @return array|mixed
+     */
+    public function create(array $data)
+    {
+        if ($data['password']){
+            $data['password'] = bcrypt($data['password']);
+        }
+        return parent::create($data);
+    }
 }

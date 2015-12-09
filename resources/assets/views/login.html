@@ -1,0 +1,46 @@
+<div class="mdl-grid demo-content">
+    <div class="mdl-card mdl-shadow--2dp demo-todo">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Entrar</h2>
+        </div>
+
+        <md-toolbar class="demo-toolbar md-primary" ng-show="error.error">
+            <div class="md-toolbar-tools" style="margin-left: 20px;">
+                <strong>Whoops!</strong> Ocorreram erros<br/>
+                <span>{{ error.message }}</span>
+            </div>
+        </md-toolbar>
+
+        <form name="form" role="form" method="POST" ng-submit="login()">
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-class="{'has-error': !form.email.$valid && form.email.$touched}">
+                    <input class="mdl-textfield__input" type="email" name="email" id="email" ng-model="user.username" required/>
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                    <div ng-messages="form.email.$error" ng-show="form.email.$touched">
+                        <div ng-message="required" class="mdl-textfield__error">Campo obrigatório!</div>
+                        <div ng-message="email" class="mdl-textfield__error">E-mail inválido!</div>
+                    </div>
+                </div>
+                <br/>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'has-error': !form.password.$valid && form.password.$touched}">
+                    <input class="mdl-textfield__input" type="password" id="password" name="password" ng-model="user.password" required/>
+                    <label class="mdl-textfield__label" for="password">Senha</label>
+                    <div ng-messages="form.password.$error" ng-show="form.password.$touched">
+                        <div ng-message="required" class="mdl-textfield__error">Campo obrigatório!</div>
+                    </div>
+                </div>
+
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                    <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Lembrar dos meus dados de acesso</span>
+                </label>
+
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    Entrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
