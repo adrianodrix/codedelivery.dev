@@ -23,6 +23,7 @@ Route::post('/oauth/access_token', ['as' => 'oauth.access_token', function() {
 Route::group(['prefix' => 'api/v1', 'as' => 'api.v1.'], function(){
 
     Route::resource('/user', 'API\\Admin\\UserController', ['only' => ['store']]);
+    Route::post('/user/forgot-password', ['as' => 'user.forgot-password', 'uses' => 'API\\Admin\\UserController@forgotPassword']);
 
     Route::group(['middleware' => 'oauth'], function(){
         Route::get('/user/authenticated', ['as' => 'user.authenticated', 'uses' => 'API\\Admin\\UserController@authenticated']);

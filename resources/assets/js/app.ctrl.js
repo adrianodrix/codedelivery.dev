@@ -117,6 +117,7 @@ angular.module('app')
             .cancel('Ops! Cancelar.');
         $mdDialog.show(confirm).then(function() {
           OAuthToken.removeToken();
+          $cookies.remove('user');
           $location.path('/conta/entrar');
         });
       };

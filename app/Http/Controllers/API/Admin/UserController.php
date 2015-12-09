@@ -6,6 +6,7 @@ use CodeDelivery\Http\Controllers\EntityController;
 use CodeDelivery\Http\Requests;
 use CodeDelivery\Repositories\Contracts\UserRepository;
 use CodeDelivery\Services\UserService;
+use Illuminate\Http\Request;
 
 class UserController extends EntityController
 {
@@ -22,5 +23,11 @@ class UserController extends EntityController
     public function authenticated()
     {
         return $this->repository->find(\Authorizer::getResourceOwnerId());
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        throw new \Exception('Desculpe, mas este recurso ainda não foi implementado!');
+        return $request->all();
     }
 }

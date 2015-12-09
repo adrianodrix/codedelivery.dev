@@ -74,4 +74,17 @@ angular.module('app')
                 };
                 $scope.isDisabled = false;
             };
+
+            $scope.forgotPassword = function(){
+                user.forgotPassword($scope.user, {}, function(data){
+                    $location.path('/conta/entrar');
+                }, function(error){
+                    $mdDialog
+                        .show( $mdDialog.alert({
+                            title: 'Woops!',
+                            content: error.data.message,
+                            ok: 'Ok'
+                        }) );
+                });
+            };
         }]);

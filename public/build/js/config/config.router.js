@@ -59,6 +59,11 @@ angular.module('app')
                   templateUrl: '/build/html/pages/signup.html',
                   controller: 'loginController',
               })
+              .state('access.forgot-password', {
+                  url: '/lembrar-senha',
+                  templateUrl: '/build/html/pages/forgot-password.html',
+                  controller: 'loginController',
+              })
               //Errors
               .state('404', {
                   url: '/404',

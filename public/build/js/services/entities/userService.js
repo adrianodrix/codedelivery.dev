@@ -8,5 +8,9 @@ angular.module('app')
                 url: config.baseUrl + '/user/authenticated',
                 method: 'GET'
             },
+            forgotPassword: {
+                url: config.baseUrl + '/user/forgot-password',
+                method: 'POST'
+            },
         });
     }]);
