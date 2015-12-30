@@ -141,7 +141,7 @@ gulp.task('watch-dev',['clear-build-folder'], function(){
         'copy-styles', 'copy-libs', 'copy-scripts', 'copy-html', 'copy-fonts', 'copy-images'
     );
     gulp.watch(config.assets_path + '/**',[
-        'copy-styles', 'copy-libs', 'copy-scripts', 'copy-html', 'copy-fonts', 'copy-images'
+        'copy-styles', 'copy-scripts', 'copy-html', 'copy-fonts', 'copy-images'
     ]);
 });
 

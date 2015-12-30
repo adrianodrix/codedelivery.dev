@@ -1,0 +1,54 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form name="form" ng-submit="save(product)">
+        <md-subheader class="md-sticky-no-effect">Produto</md-subheader>
+        <md-content>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Descrição</label>
+                <input class="md-input-focused" name="name" ng-model="product.name" required>
+                <div ng-messages="form.name.$error" ng-show="form.name.$touched && form.name.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Descrição Completa</label>
+                <textarea rows="1" columns="1" aria-multiline="true" name="description" ng-model="product.description"></textarea>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-8">
+                <md-autocomplete flex="" required=""
+                                 md-floating-label="Categoria"
+                                 md-items="item in getCategories(searchText)"
+                                 md-selected-item-change="setCategory(selectedItem)"
+                                 md-input-name="category"
+                                 md-selected-item="selectedItem"
+                                 md-search-text="searchText"
+                                 md-item-text="item.name"
+                                 md-no-cache="true"
+                                 md-autoselect="true"
+                                 placeholder="Categoria">
+                    <md-item-template>
+                        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        Nenhum registro encontrado para <strong>{{searchText}}</strong>.
+                    </md-not-found>
+                    <div ng-messages="form.category.$error" ng-show="form.category.$touched && form.category.$invalid">
+                        <div ng-message="required">Este campo é obrigatório.</div>
+                    </div>
+                </md-autocomplete>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-4">
+                <label>Preço</label>
+                <input type="number" step="0.01" name="price" ng-model="product.price" currency required>
+                <div ng-messages="form.price.$error" ng-show="form.price.$touched && form.price.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                    <div ng-message="number">Este campo aceita somente número.</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" type="submit">Gravar</md-button>
+            <md-button class="md-raised md-error" ng-click="cancel()">Cancelar</md-button>
+        </div>
+    </form>
+</md-dialog>

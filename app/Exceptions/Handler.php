@@ -4,6 +4,7 @@ namespace CodeDelivery\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -55,7 +56,7 @@ class Handler extends ExceptionHandler
             $error = new \stdclass();
             $error->error = true;
 
-            if ($e instanceof NotFoundHttpException) {
+            if ($e instanceof NotFoundHttpException){
                 $error->code = $e->getStatusCode();
             } else {
                 $error->code = $e->getCode();
@@ -69,6 +70,10 @@ class Handler extends ExceptionHandler
                 $error->message = $e->getMessageBag();
             } else {
                 $error->message = $e->getMessage();
+                if ($e instanceof QueryException) {
+                    $error->code = 400;
+                    $error->message = $e->previous->getMessage();
+                }
 
                 if (\App::environment('local')) {
                     $error->file = $e->getFile();

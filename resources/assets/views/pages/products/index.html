@@ -1,0 +1,34 @@
+
+<div class="alert alert-info none ie-show">
+    Some components not working on IE9.
+</div>
+<div class="panel panel-card p" >
+    <div class="row">
+
+        <table st-table="rowCollectionBasic" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th align="right">Preço</th>
+                <th>Últ. Alteração</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="row in products | itemsPerPage: productsPerPage" total-items="totalProducts" current-page="pagination.current">
+                <td><a href ng-click="update(row, $event)">{{row.name | uppercase}}</a></td>
+                <td>{{row.category.data.name}}</td>
+                <td align="right">{{row.price | currency}}</td>
+                <td>{{row.updated_at | fromNow }}</td>
+                <td><a href ng-click="delete(row)"><span class="label red">Excluir</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin-left: 18px;">
+            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+    </div>
+</div>
+
+<a href class="md-btn md-fab md-fab-bottom-right pos-fix blue" ng-click="new($event)"><i class="mdi-editor-mode-edit i-24"></i></a>

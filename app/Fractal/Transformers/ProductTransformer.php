@@ -34,7 +34,10 @@ class ProductTransformer extends TransformerAbstract
 
     public function includeCategory(Product $model)
     {
-        return $this->item($model->category, $this->setTransformer(new CategoryTransformer()));
+        if ($model->category != null){
+            return $this->item($model->category, $this->setTransformer(new CategoryTransformer()));
+        }
+        return null;
     }
 
     private function setTransformer($transformer)

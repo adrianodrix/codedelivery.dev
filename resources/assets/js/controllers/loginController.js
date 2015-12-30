@@ -20,7 +20,7 @@ angular.module('app')
                             user.authenticated({}, {}, function(data){
                                 $cookies.putObject('user', data);
                                 $rootScope.userActive = data;
-                                $location.path('app/dashboard');
+                                $location.path('/dashboard');
                             });
                         },
                         function(){

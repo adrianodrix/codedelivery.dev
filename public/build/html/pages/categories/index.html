@@ -1,0 +1,28 @@
+
+<div class="alert alert-info none ie-show">
+    Some components not working on IE9.
+</div>
+<div class="panel panel-card p" >
+    <div class="row">
+
+        <table st-table="rowCollectionBasic" class="table table-striped">
+            <thead>
+            <tr>
+                <th st-sort="name"><a href ng-click="orderBy('name')">Descrição</a></th>
+                <th st-sort="created_at"><a href ng-click="orderBy('created_at')">Cadastro</a></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in categories">
+                <td><a href ng-click="update(row, $event)">{{row.name | uppercase}}</a></td>
+                <td>{{row.created_at_for_humans}}</td>
+                <td><a href ng-click="delete(row)"><span class="label red">Excluir</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<a href class="md-btn md-fab md-fab-bottom-right pos-fix blue" ng-click="new($event)"><i class="mdi-editor-mode-edit i-24"></i></a>

@@ -49,6 +49,13 @@ angular.module('app')
           ]
       },
       {
+          name: 'pagination',
+          module: true,
+          files: [
+              '../../build/libs/angular/angular-pagination/dirPagination.js'
+          ]
+      },
+      {
           name: 'smart-table',
           module: true,
           files: [

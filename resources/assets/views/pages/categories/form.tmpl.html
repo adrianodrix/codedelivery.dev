@@ -1,0 +1,19 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form name="form" ng-submit="save(category)">
+        <md-subheader class="md-sticky-no-effect">Categoria</md-subheader>
+        <md-content>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Descrição</label>
+                <input class="md-input-focused" name="name" ng-model="category.name" required>
+                <div ng-messages="form.name.$error" ng-show="form.name.$touched && form.name.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" type="submit">Gravar</md-button>
+            <md-button class="md-raised md-error" ng-click="cancel()">Cancelar</md-button>
+        </div>
+    </form>
+</md-dialog>

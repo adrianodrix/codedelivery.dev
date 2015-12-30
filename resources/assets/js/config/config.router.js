@@ -25,7 +25,7 @@ angular.module('app')
           $stateProvider
               .state('app', {
                   abstract: true,
-                  url: '/app',
+                  url: '',
                   views: {
                       '': {
                           templateUrl: '/build/html/layout.html'
@@ -43,6 +43,19 @@ angular.module('app')
                   templateUrl: '/build/html/pages/dashboard.html',
                   data : { title: 'Dashboard', folded: true },
                   //resolve: load(['scripts/controllers/chart.js','scripts/controllers/vectormap.js'])
+              })
+              .state('app.categories', {
+                  url: '/categorias',
+                  templateUrl: '/build/html/pages/categories/index.html',
+                  controller: 'categoryController',
+                  data : { title: 'Categorias', folded: true },
+              })
+              .state('app.products', {
+                  url: '/produtos',
+                  templateUrl: '/build/html/pages/products/index.html',
+                  controller: 'productController',
+                  data : { title: 'Produtos', folded: true },
+                  resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
               })
               //Account
               .state('access', {
