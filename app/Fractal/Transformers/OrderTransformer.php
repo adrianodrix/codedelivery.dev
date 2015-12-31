@@ -2,6 +2,7 @@
 
 namespace CodeDelivery\Fractal\Transformers;
 
+use CodeDelivery\Entities\User;
 use League\Fractal\TransformerAbstract;
 use CodeDelivery\Entities\Order;
 
@@ -11,8 +12,12 @@ use CodeDelivery\Entities\Order;
  */
 class OrderTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = [
+    protected $defaultIncludes = [
         'client',
+        'deliveryMan',
+    ];
+
+    protected $availableIncludes = [
         'items',
     ];
 
@@ -37,11 +42,25 @@ class OrderTransformer extends TransformerAbstract
 
     public function includeClient(Order $model)
     {
+        if (!$model->client){
+            return;
+        }
         return $this->item($model->client, $this->setTransformer(new ClientTransformer()));
+    }
+
+    public function includeDeliveryMan(Order $model)
+    {
+        if (!$model->deliveryMan){
+            return;
+        }
+        return $this->item($model->deliveryMan, $this->setTransformer(new UserTransformer()));
     }
 
     public function includeItems(Order $model)
     {
+        if (!$model->items){
+            return;
+        }
         return $this->collection($model->items, $this->setTransformer(new OrderItemTransformer()));
     }
 

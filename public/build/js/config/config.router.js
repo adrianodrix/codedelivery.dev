@@ -64,6 +64,20 @@ angular.module('app')
                   data : { title: 'Clientes', folded: true },
                   resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
               })
+              .state('app.orders', {
+                  url: '/pedidos',
+                  templateUrl: '/build/html/pages/orders/index.html',
+                  controller: 'orderController',
+                  data : { title: 'Pedidos', folded: true },
+                  resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
+              })
+              .state('app.coupons', {
+                  url: '/cupons',
+                  templateUrl: '/build/html/pages/coupons/index.html',
+                  controller: 'couponController',
+                  data : { title: 'Cupons', folded: true },
+                  resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
+              })
               //Account
               .state('access', {
                   url: '/conta',

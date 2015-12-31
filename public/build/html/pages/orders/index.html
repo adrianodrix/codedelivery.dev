@@ -1,0 +1,41 @@
+<div class="alert alert-info none ie-show">
+    Some components not working on IE9.
+</div>
+<div class="panel panel-card p" >
+    <div class="row">
+
+        <table st-table="rowCollectionBasic" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Ordem No</th>
+                <th>Cliente</th>
+                <th>Entregador</th>
+                <th align="right">Total</th>
+                <th>Cadastro</th>
+                <th>Situação</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="row in orders | itemsPerPage: ordersPerPage" total-items="totalorders" current-page="pagination.current">
+                <td align="right"><a href ng-click="update(row, $event)">{{row.id}}</a></td>
+                <td><a href ng-click="update(row, $event)">{{row.client.data.name  | uppercase }}</a></td>
+                <td>{{row.deliveryMan.data.name}}</td>
+                <td align="right">{{row.total | currency}}</td>
+                <td>{{row.created_at | fromNow}}</td>
+                <td ng-switch on="row.status">
+                    <span ng-switch-when="0" class="label orange">Pendente</span>
+                    <span ng-switch-when="1" class="label purple">A Caminho</span>
+                    <span ng-switch-when="2" class="label green">Entregue</span>
+                </td>
+                <td><a href ng-click="delete(row)"><span class="label red">Excluir</span></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin-left: 18px;">
+            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+    </div>
+</div>
+
+<a href class="md-btn md-fab md-fab-bottom-right pos-fix blue" ng-click="new($event)"><i class="mdi-editor-mode-edit i-24"></i></a>

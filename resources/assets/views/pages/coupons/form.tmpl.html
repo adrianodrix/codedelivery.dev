@@ -1,0 +1,28 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form name="form" ng-submit="save(coupon)">
+        <md-subheader class="md-sticky-no-effect">Cupom</md-subheader>
+
+        <md-content>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Código</label>
+                <input class="md-input-focused" name="code" ng-model="coupon.code" required>
+                <div ng-messages="form.code.$error" ng-show="form.code.$touched && form.code.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-4">
+                <label>Valor</label>
+                <input type="number" step="0.01" name="value" ng-model="coupon.value" currency required>
+                <div ng-messages="form.value.$error" ng-show="form.value.$touched && form.value.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                    <div ng-message="number">Este campo aceita somente número.</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" type="submit">Gravar</md-button>
+            <md-button class="md-raised md-error" ng-click="cancel()">Cancelar</md-button>
+        </div>
+    </form>
+</md-dialog>

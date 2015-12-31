@@ -18,7 +18,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         ValidatorInterface::RULE_CREATE => [
             'client_id' => 'required|integer|exists:users,id',
             'user_deliveryman_id' => 'required|integer|exists:users,id',
-            'total' => 'number|min:0',
+            'total' => 'numeric|min:0',
             'status' => 'integer|between:0,2',
             'coupon_id' => 'integer|exists:coupons,id',
         ],
@@ -26,7 +26,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         ValidatorInterface::RULE_UPDATE => [
             'client_id' => 'sometimes|required|integer|exists:users,id',
             'user_deliveryman_id' => 'sometimes|required|integer|exists:users,id',
-            'total' => 'sometimes|number|min:0',
+            'total' => 'sometimes|numeric|min:0',
             'status' => 'sometimes|integer|between:0,2',
             'coupon_id' => 'sometimes|integer|exists:coupons,id',
         ],

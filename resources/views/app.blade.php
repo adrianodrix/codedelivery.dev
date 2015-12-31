@@ -91,12 +91,16 @@
   <script src="{{ asset('build/js/controllers/categoryController.js') }}"></script>
   <script src="{{ asset('build/js/controllers/productController.js') }}"></script>
   <script src="{{ asset('build/js/controllers/clientController.js') }}"></script>
+  <script src="{{ asset('build/js/controllers/orderController.js') }}"></script>
+  <script src="{{ asset('build/js/controllers/couponController.js') }}"></script>
 
   <!-- Services -->
   <script src="{{ asset('build/js/services/entities/userService.js') }}"></script>
   <script src="{{ asset('build/js/services/entities/categoryService.js') }}"></script>
   <script src="{{ asset('build/js/services/entities/productService.js') }}"></script>
   <script src="{{ asset('build/js/services/entities/clientService.js') }}"></script>
+  <script src="{{ asset('build/js/services/entities/orderService.js') }}"></script>
+  <script src="{{ asset('build/js/services/entities/couponService.js') }}"></script>
 
 @else
   <script src="{{ elixir('js/all.js') }}"></script>

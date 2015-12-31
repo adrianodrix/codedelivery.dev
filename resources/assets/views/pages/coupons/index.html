@@ -1,0 +1,36 @@
+<div class="alert alert-info none ie-show">
+    Some components not working on IE9.
+</div>
+<div class="panel panel-card p" >
+    <div class="row">
+
+        <table st-table="rowCollectionBasic" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Código</th>
+                <th align="right">Valor</th>
+                <th>Cadastro</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr dir-paginate="row in coupons | itemsPerPage: couponsPerPage" total-items="totalcoupons" current-page="pagination.current">
+                <td><a href ng-click="update(row, $event)">{{row.code}}</a></td>
+                <td align="right">{{row.value | currency}}</td>
+                <td>{{row.created_at | fromNow}}</td>
+                <td>
+                    <i class="icon mdi-action-loyalty i-20" ng-show="row.used">
+                        <md-tooltip md-direction="left">Cupom Usado</md-tooltip>
+                    </i>
+                    <a href ng-click="delete(row)"><span class="label red" ng-hide="row.used">Excluir</span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin-left: 18px;">
+            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+    </div>
+</div>
+
+<a href class="md-btn md-fab md-fab-bottom-right pos-fix blue" ng-click="new($event)"><i class="mdi-editor-mode-edit i-24"></i></a>

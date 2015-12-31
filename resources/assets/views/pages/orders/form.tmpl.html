@@ -1,0 +1,54 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form name="form" ng-submit="save(order)">
+        <md-subheader class="md-sticky-no-effect">Pedido No. <strong>{{order.id}}</strong></md-subheader>
+        <md-card>
+            <md-card-content>
+                <h4>{{order.client.name}}</h4>
+                <p>Total: {{order.total | currency}}</p>
+                <p>Criado em: {{order.created_at | date}}</p>
+            </md-card-content>
+        </md-card>
+        <md-content>
+            <md-input-container class="md-primary md-input-has-value col-sm-12">
+                <md-autocomplete required=""
+                                 md-floating-label="Entregador"
+                                 md-items="item in getUsers(searchText)"
+                                 md-selected-item-change="setDeliveryMan(selectedItem)"
+                                 md-input-name="user"
+                                 md-selected-item="selectedItem"
+                                 md-search-text="searchText"
+                                 md-item-text="item.name"
+                                 md-no-cache="true"
+                                 md-autoselect="true">
+                    <md-item-template>
+                        <span md-highlight-text="searchText">{{item.name}}</span>
+                        <span style="color:gray;" > <{{item.email}}></span>
+                    </md-item-template>
+                    <md-not-found>
+                        Nenhum registro encontrado para <strong>{{searchText}}</strong>.
+                    </md-not-found>
+                    <div ng-messages="form.user.$error" ng-show="form.user.$touched && form.user.$invalid">
+                        <div ng-message="required">Este campo é obrigatório.</div>
+                    </div>
+                </md-autocomplete>
+            </md-input-container>
+
+            <md-input-container class="md-primary col-sm-12">
+                <label>Situação</label>
+                <md-select name="status" ng-model="order.status" required="">
+                    <md-option value="0">Pendente</md-option>
+                    <md-option value="1">A Caminho</md-option>
+                    <md-option value="2">Entregue</md-option>
+                </md-select>
+                <div ng-messages="form.status.$error" ng-show="form.status.$touched && form.status.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" type="submit">Gravar</md-button>
+            <md-button class="md-raised md-error" ng-click="cancel()">Cancelar</md-button>
+        </div>
+    </form>
+</md-dialog>
