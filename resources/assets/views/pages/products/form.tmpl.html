@@ -13,7 +13,7 @@
                 <label>Descrição Completa</label>
                 <textarea rows="1" columns="1" aria-multiline="true" name="description" ng-model="product.description"></textarea>
             </md-input-container>
-            <md-input-container class="md-primary col-sm-8">
+            <md-input-container class="md-primary md-input-has-value col-sm-8">
                 <md-autocomplete flex="" required=""
                                  md-floating-label="Categoria"
                                  md-items="item in getCategories(searchText)"

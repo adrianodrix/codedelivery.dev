@@ -12,5 +12,10 @@ angular.module('app')
                 url: config.baseUrl + '/user/forgot-password',
                 method: 'POST'
             },
+            search: {
+                url: config.baseUrl + '/user/search',
+                method:'GET',
+                isArray:false
+            },
         });
     }]);

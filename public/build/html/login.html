@@ -14,7 +14,7 @@
         <form name="form" role="form" method="POST" ng-submit="login()">
             <div class="mdl-card__supporting-text">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-class="{'has-error': !form.email.$valid && form.email.$touched}">
-                    <input class="mdl-textfield__input" type="email" name="email" id="email" ng-model="user.username" required/>
+                    <input class="mdl-textfield__input" type="email" name="email" id="email" ng-model="user.username" autofocus required/>
                     <label class="mdl-textfield__label" for="email">Email</label>
                     <div ng-messages="form.email.$error" ng-show="form.email.$touched">
                         <div ng-message="required" class="mdl-textfield__error">Campo obrigatório!</div>

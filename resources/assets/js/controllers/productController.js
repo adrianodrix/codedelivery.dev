@@ -48,7 +48,7 @@ angular.module('app')
 
                 $mdDialog.show({
                         templateUrl: '/build/html/pages/products/form.tmpl.html',
-                        controller: DialogController,
+                        controller: DialogControllerProduct,
                         targetEvent: ev,
                         locals: {
                             obj: reg,
@@ -74,7 +74,7 @@ angular.module('app')
             $scope.new = function(ev) {
                 $mdDialog.show({
                         templateUrl: '/build/html/pages/products/form.tmpl.html',
-                        controller: DialogController,
+                        controller: DialogControllerProduct,
                         targetEvent: ev,
                         locals: {
                             obj: {},
@@ -138,7 +138,7 @@ angular.module('app')
             getAll(1);
         }]);
 
-function DialogController($scope, $mdDialog, $q, category, obj) {
+function DialogControllerProduct($scope, $mdDialog, $q, category, obj) {
     $scope.product       = obj;
     $scope.selectedItem  = obj.category;
     $scope.searchText    = null;

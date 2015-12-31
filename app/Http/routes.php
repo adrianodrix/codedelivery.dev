@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api/v1', 'as' => 'api.v1.'], function(){
 
     Route::group(['middleware' => 'oauth'], function(){
         Route::get('/user/authenticated', ['as' => 'user.authenticated', 'uses' => 'API\\Admin\\UserController@authenticated']);
+        Route::get('/user/search', ['as' => 'user.authenticated', 'uses' => 'API\\Admin\\UserController@index']);
 
         Route::group(['prefix' => 'admin', 'middleware' => 'oauth.checkrole:admin','as' => 'admin.'], function(){
             Route::resource('/category',    'API\\Admin\\CategoryController');

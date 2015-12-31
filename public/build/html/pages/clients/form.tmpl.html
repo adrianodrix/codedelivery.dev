@@ -1,0 +1,67 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form name="form" ng-submit="save(client)">
+        <md-subheader class="md-sticky-no-effect">Cliente</md-subheader>
+        <md-content>
+            <md-input-container class="md-primary md-input-has-value col-sm-12">
+                <md-autocomplete required=""
+                                 md-floating-label="Usuário"
+                                 md-items="item in getUsers(searchText)"
+                                 md-selected-item-change="setUser(selectedItem)"
+                                 md-input-name="user"
+                                 md-selected-item="selectedItem"
+                                 md-search-text="searchText"
+                                 md-item-text="item.name"
+                                 md-no-cache="true"
+                                 md-autoselect="true">
+                    <md-item-template>
+                        <span md-highlight-text="searchText">{{item.name}}</span>
+                        <span style="color:gray;" > <{{item.email}}></span>
+                    </md-item-template>
+                    <md-not-found>
+                        Nenhum registro encontrado para <strong>{{searchText}}</strong>.
+                    </md-not-found>
+                    <div ng-messages="form.user.$error" ng-show="form.user.$touched && form.user.$invalid">
+                        <div ng-message="required">Este campo é obrigatório.</div>
+                    </div>
+                </md-autocomplete>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Endereço</label>
+                <textarea rows="1" columns="1" aria-multiline="true" name="address" ng-model="client.address"></textarea>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-12">
+                <label>Telefone</label>
+                <input class="md-input-focused" name="phone" ng-model="client.phone" required>
+                <div ng-messages="form.phone.$error" ng-show="form.phone.$touched && form.phone.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-6">
+                <label>Cidade</label>
+                <input class="md-input-focused" name="city" ng-model="client.city" required>
+                <div ng-messages="form.city.$error" ng-show="form.city.$touched && form.city.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-3">
+                <label>Estado</label>
+                <input class="md-input-focused" name="state" ng-model="client.state" required>
+                <div ng-messages="form.state.$error" ng-show="form.state.$touched && form.state.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-primary col-sm-3">
+                <label>Cep</label>
+                <input class="md-input-focused" name="postcode" ng-model="client.postcode" required>
+                <div ng-messages="form.postcode.$error" ng-show="form.postcode.$touched && form.postcode.$invalid">
+                    <div ng-message="required">Este campo é obrigatório.</div>
+                </div>
+            </md-input-container>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" type="submit">Gravar</md-button>
+            <md-button class="md-raised md-error" ng-click="cancel()">Cancelar</md-button>
+        </div>
+    </form>
+</md-dialog>

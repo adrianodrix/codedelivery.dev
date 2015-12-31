@@ -35,7 +35,7 @@ angular.module('app')
 
                 $mdDialog.show({
                         templateUrl: '/build/html/pages/categories/form.tmpl.html',
-                        controller: DialogController,
+                        controller: DialogControllerCategory,
                         targetEvent: ev,
                         locals: {
                             obj: reg,
@@ -61,7 +61,7 @@ angular.module('app')
             $scope.new = function(ev) {
                 $mdDialog.show({
                         templateUrl: '/build/html/pages/categories/form.tmpl.html',
-                        controller: DialogController,
+                        controller: DialogControllerCategory,
                         targetEvent: ev,
                         locals: {
                             obj: {},
@@ -125,7 +125,7 @@ angular.module('app')
             getAll();
         }]);
 
-function DialogController($scope, $mdDialog, obj) {
+function DialogControllerCategory($scope, $mdDialog, obj) {
     $scope.category = obj;
 
     $scope.hide = function() {

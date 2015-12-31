@@ -90,11 +90,13 @@
   <script src="{{ asset('build/js/controllers/loginController.js') }}"></script>
   <script src="{{ asset('build/js/controllers/categoryController.js') }}"></script>
   <script src="{{ asset('build/js/controllers/productController.js') }}"></script>
+  <script src="{{ asset('build/js/controllers/clientController.js') }}"></script>
 
   <!-- Services -->
   <script src="{{ asset('build/js/services/entities/userService.js') }}"></script>
   <script src="{{ asset('build/js/services/entities/categoryService.js') }}"></script>
   <script src="{{ asset('build/js/services/entities/productService.js') }}"></script>
+  <script src="{{ asset('build/js/services/entities/clientService.js') }}"></script>
 
 @else
   <script src="{{ elixir('js/all.js') }}"></script>

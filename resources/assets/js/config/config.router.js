@@ -57,6 +57,13 @@ angular.module('app')
                   data : { title: 'Produtos', folded: true },
                   resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
               })
+              .state('app.clients', {
+                  url: '/clientes',
+                  templateUrl: '/build/html/pages/clients/index.html',
+                  controller: 'clientController',
+                  data : { title: 'Clientes', folded: true },
+                  resolve: load(['build/js/filters/fromnow.js', 'moment', 'pagination'])
+              })
               //Account
               .state('access', {
                   url: '/conta',

@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('app')
-    .controller('productController',
-        [       '$rootScope', '$scope', '$location', '$cookies', '$mdDialog', 'OAuth', 'product',
-        function($rootScope,   $scope,   $location,   $cookies,   $mdDialog,   OAuth,   product){
+    .controller('clientController',
+        [       '$rootScope', '$scope', '$location', '$cookies', '$mdDialog', 'OAuth', 'client',
+        function($rootScope,   $scope,   $location,   $cookies,   $mdDialog,   OAuth,   client){
 
-            $scope.totalProducts = 0;
-            $scope.productsPerPage = 5;
+            $scope.totalClients = 0;
+            $scope.clientsPerPage = 5;
             $scope.isDisabled = false;
-            $scope.products = [];
+            $scope.clients = [];
 
-            $scope.product = {
+            $scope.client = {
                 name: '',
             };
 
@@ -22,15 +22,12 @@ angular.module('app')
                 if (!pageNumber){
                     pageNumber = $scope.pagination.current;
                 };
-
-                product.query({
-                    orderBy: 'name',
-                    sortedBy: 'asc',
+                client.query({
                     page: pageNumber,
-                    limit: $scope.productsPerPage,
+                    limit: $scope.clientsPerPage,
             }, function(result){
-                    $scope.products = result.data;
-                    $scope.totalProducts = result.meta.pagination.total;
+                    $scope.clients = result.data;
+                    $scope.totalClients = result.meta.pagination.total;
                 });
             };
 
@@ -41,14 +38,16 @@ angular.module('app')
             $scope.update = function(obj, ev) {
                 var reg         = new Object();
                 reg.id          = obj.id;
-                reg.name        = obj.name;
-                reg.description = obj.description;
-                reg.price       = obj.price;
-                reg.category    = (typeof obj.category != 'undefined') ? obj.category.data : null;
+                reg.user        = (typeof obj.user != 'undefined') ? obj.user.data : null;
+                reg.address = obj.address;
+                reg.phone = obj.phone;
+                reg.city = obj.city;
+                reg.state = obj.state;
+                reg.postcode = obj.postcode;
 
                 $mdDialog.show({
-                        templateUrl: '/build/html/pages/products/form.tmpl.html',
-                        controller: DialogControllerProduct,
+                        templateUrl: '/build/html/pages/clients/form.tmpl.html',
+                        controller: DialogControllerClient,
                         targetEvent: ev,
                         locals: {
                             obj: reg,
@@ -56,7 +55,7 @@ angular.module('app')
                     })
                     .then(function(data) {
                         if(typeof data != 'undefined'){
-                            product.update(data)
+                            client.update(data)
                                 .$promise
                                 .then(
                                     function () {
@@ -73,8 +72,8 @@ angular.module('app')
 
             $scope.new = function(ev) {
                 $mdDialog.show({
-                        templateUrl: '/build/html/pages/products/form.tmpl.html',
-                        controller: DialogControllerProduct,
+                        templateUrl: '/build/html/pages/clients/form.tmpl.html',
+                        controller: DialogControllerClient,
                         targetEvent: ev,
                         locals: {
                             obj: {},
@@ -82,7 +81,7 @@ angular.module('app')
                     })
                     .then(function(data) {
                         if(typeof data != 'undefined'){
-                            product.save(data)
+                            client.save(data)
                                 .$promise
                                 .then(
                                     function (data) {
@@ -104,7 +103,7 @@ angular.module('app')
                     .ok('Sim!')
                     .cancel('Ops! Não');
                 $mdDialog.show(confirm).then(function() {
-                    product.delete({id: obj.id})
+                    client.delete({id: obj.id})
                         .$promise
                         .then(function(){
                             getAll();
@@ -138,22 +137,22 @@ angular.module('app')
             getAll(1);
         }]);
 
-function DialogControllerProduct($scope, $mdDialog, $q, category, obj) {
-    $scope.product       = obj;
-    $scope.selectedItem  = obj.category;
+function DialogControllerClient($scope, $mdDialog, $q, user, obj) {
+    $scope.client       = obj;
+    $scope.selectedItem  = obj.user;
     $scope.searchText    = null;
 
-    $scope.setCategory = function(category){
-        if (!category) {
+    $scope.setUser = function(user){
+        if (!user) {
             return;
         } else {
-            $scope.product.category_id = category.id;
+            $scope.client.user_id = user.id;
         }
     };
 
-    $scope.getCategories = function (name){
+    $scope.getUsers = function (name){
         var deffered = $q.defer();
-        category.search({
+        user.search({
                 search: name,
                 searchFields: 'name:like',
                 limit:10,
